@@ -6,3 +6,16 @@ services:
     restart: always
     ports:
       - "3000:3000"
+  db:
+    restart: always
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=user
+      - POSTGRES_DB=db
+    healthcheck:
+      test: "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"
+      interval: 5s
+      retries: 20
+    ports:
+      - "5432:5432"
