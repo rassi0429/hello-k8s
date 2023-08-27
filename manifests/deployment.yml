@@ -15,8 +15,13 @@ spec:
     spec:
       containers:
       - name: hello-k8s
-        image: ghcr.io/rassi0429/hello-k8s:v1.0.3
+        image: ghcr.io/rassi0429/hello-k8s:1.0.2
         imagePullPolicy: Always
+        resources:
+          requests:
+            memory: 100Mi
+          limits:
+            memory: 100Mi
 ---
 kind: Service
 apiVersion: v1
