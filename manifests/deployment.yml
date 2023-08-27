@@ -25,7 +25,7 @@ metadata:
   namespace: lbtest
 spec:
   selector:
-    app: hello-k8s
+    name: hello-k8s
   ports:
   - protocol: TCP
     port: 80
