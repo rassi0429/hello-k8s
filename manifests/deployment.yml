@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-k8s
+  namespace: lbtest
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      name: hello-k8s
+  template:
+    metadata:
+      labels:
+        name: hello-k8s
+    spec:
+      containers:
+      - name: hello-k8s
+        image: ghcr.io/rassi0429/hello-k8s:v1.0.3
+        imagePullPolicy: Always
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: lb
+  namespace: lbtest
+spec:
+  selector:
+    app: hello-k8s
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 3000
+  type: LoadBalancer
